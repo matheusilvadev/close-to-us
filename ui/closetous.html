@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="closetous.css" />
+    <title>Close To Us</title>
+    <!-- Inclui Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Close To Us</h1>
+    </header>
+
+    <div class="container">
+      <h2>Consulta de Asteroides Próximos à Terra</h2>
+      <p class="info-text">
+        Por favor, selecione um intervalo de datas. **Atenção:** Devido a uma
+        limitação da API da NASA, o período entre a data inicial e a data final
+        **não pode exceder 7 dias**.
+      </p>
+
+      <div class="input-group">
+        <div>
+          <label for="startDate">Data Inicial:</label>
+          <input type="date" id="startDate" />
+        </div>
+        <div>
+          <label for="endDate">Data Final:</label>
+          <input type="date" id="endDate" />
+        </div>
+        <button id="fetchButton">Buscar Asteroides</button>
+      </div>
+
+      <div id="loading-indicator" class="hidden">Carregando dados...</div>
+      <div id="error-message" class="hidden"></div>
+      <div id="results"></div>
+    </div>
+
+    <script src="closetous.js"></script>
+  </body>
+</html>

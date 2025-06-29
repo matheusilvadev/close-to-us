@@ -1,0 +1,226 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 8rem;
+  box-sizing: border-box;
+}
+
+/* Header fixo no topo */
+header {
+  background-color: #0d0d0d;
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.15rem;
+  margin: 0;
+  max-width: 900px;
+  width: 100%;
+  text-align: left;
+}
+
+.container {
+  background-color: #282828;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid #444444;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+}
+
+.info-text {
+  color: #a0a0a0;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Input group base styles (for mobile first, column layout) */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  align-items: center;
+}
+
+.input-group label {
+  font-weight: 600;
+  color: #cccccc;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  display: block;
+}
+
+.input-group input[type="date"] {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #555555;
+  border-radius: 0.75rem;
+  background-color: #383838;
+  color: #ffffff;
+  font-size: 1.15rem;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input-group input[type="date"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  box-sizing: border-box;
+}
+button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#loading-indicator {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  color: #ffc107;
+}
+#error-message {
+  margin-top: 1.5rem;
+  color: #dc3545;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+#results {
+  margin-top: 2rem;
+  text-align: left;
+}
+.asteroid-card {
+  background-color: #383838;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid #555555;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.asteroid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+}
+.asteroid-card h3 {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #555555;
+  padding-bottom: 0.75rem;
+  letter-spacing: 0.03rem;
+}
+.asteroid-card p {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #cccccc;
+}
+.asteroid-card strong {
+  color: #ffffff;
+}
+.hazardous {
+  color: #dc3545;
+  font-weight: 700;
+}
+
+/* Responsividade para telas maiores (desktop) */
+@media (min-width: 640px) {
+  .input-group {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 2rem;
+  }
+  .input-group > div {
+    width: 256px;
+    text-align: left;
+  }
+  button {
+    width: 256px;
+    margin-top: 0;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    padding-top: 6rem;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
+  }
+  .container {
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  .info-text {
+    font-size: 0.9rem;
+  }
+  button {
+    font-size: 1.05rem;
+    padding: 0.9rem 1.8rem;
+  }
+  .input-group input[type="date"] {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+  .asteroid-card h3 {
+    font-size: 1.6rem;
+  }
+  .asteroid-card p {
+    font-size: 0.95rem;
+  }
+}
