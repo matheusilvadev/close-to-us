@@ -1,6 +1,6 @@
 package astr.api.service;
 
-import astr.api.domain.AsteroidDomain;
+import astr.api.core.Asteroid;
 import astr.api.service.dtos.AsteroidSummaryDTO;
 import astr.api.service.dtos.NasaFeedResponse;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class AsteroidService {
                 });
     }
 
-    private AsteroidSummaryDTO mapToAsteroidSummaryDTO(AsteroidDomain asteroid) {
+    private AsteroidSummaryDTO mapToAsteroidSummaryDTO(Asteroid asteroid) {
         // Assume que sempre haverá pelo menos um close_approach_data
         String missDistanceKilometers = null;
         String relativeVelocityKilometersPerSecond = null;

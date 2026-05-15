@@ -1,7 +1,5 @@
 package astr.api.service.dtos;
 
-import astr.api.domain.estdiameter.Units;
-
 public class AsteroidSummaryDTO {
 
     private String name;

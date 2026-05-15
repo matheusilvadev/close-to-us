@@ -1,6 +1,6 @@
 package astr.api.service.dtos;
 
-import astr.api.domain.AsteroidDomain;
+import astr.api.core.Asteroid;
 import astr.api.service.mapper.Links;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,7 +16,7 @@ public class NasaFeedResponse {
     private int elementCount;
 
     @JsonProperty("near_earth_objects")
-    private Map<String, List<AsteroidDomain>> nearEarthObjects;
+    private Map<String, List<Asteroid>> nearEarthObjects;
 
     public NasaFeedResponse() {
     }
@@ -37,11 +37,11 @@ public class NasaFeedResponse {
         this.elementCount = elementCount;
     }
 
-    public Map<String, List<AsteroidDomain>> getNearEarthObjects() {
+    public Map<String, List<Asteroid>> getNearEarthObjects() {
         return nearEarthObjects;
     }
 
-    public void setNearEarthObjects(Map<String, List<AsteroidDomain>> nearEarthObjects) {
+    public void setNearEarthObjects(Map<String, List<Asteroid>> nearEarthObjects) {
         this.nearEarthObjects = nearEarthObjects;
     }
 }
