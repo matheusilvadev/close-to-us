@@ -1,7 +1,6 @@
 package astr.api.controller;
 
-import astr.api.service.AsteroidService;
-import astr.api.service.dtos.AsteroidSummaryDTO;
+import astr.api.service.GetCloseAsteroidsService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -13,9 +12,9 @@ import java.util.List;
 @RequestMapping("/asteroids")
 @CrossOrigin(origins = "*")
 public class AsteroidController {
-    private final AsteroidService nasaAsteroidService;
+    private final GetCloseAsteroidsService nasaAsteroidService;
 
-    public AsteroidController(AsteroidService nasaAsteroidService) {
+    public AsteroidController(GetCloseAsteroidsService nasaAsteroidService) {
         this.nasaAsteroidService = nasaAsteroidService;
     }
 
