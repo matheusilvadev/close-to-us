@@ -1,36 +1,32 @@
-# Close To Us
-![Anotação 2025-06-29 175517](https://github.com/user-attachments/assets/fe1c984b-6079-4346-93bd-991b9c426b5e)
+# Close To Us - Asteroid Radar API ☄️
 
-## Sobre o Projeto
+"Close To Us" is a backend REST API designed to monitor and analyze Near-Earth Objects (NEOs) using official telemetry from NASA's NeoWs (Near Earth Object Web Service) API. 
 
-"Close To Us" é uma aplicação web que permite aos usuários consultar informações sobre asteroides próximos à Terra, utilizando dados da API NeoWs (Near Earth Object Web Service) da NASA. Com uma interface moderna e intuitiva, os usuários podem selecionar um intervalo de datas para visualizar detalhes como diâmetro estimado, distância de aproximação, velocidade e se o asteroide é potencialmente perigoso.
+Recently overhauled, the project was migrated from an anemic, reactive architecture to a **Pragmatic Imperative Clean Architecture**. It features an encapsulated Rich Domain Model, automated testing invariants, and a dedicated Anti-Corruption Layer (ACL) to protect the core business rules from external API structural changes.
 
-O projeto é dividido em duas partes principais:
-* **Frontend**: Uma aplicação web construída com HTML, CSS (utilizando Tailwind CSS para estilização rápida e responsiva) e JavaScript puro, responsável pela interface do usuário e pela comunicação com o backend.
-* **Backend**: Uma API REST desenvolvida com Spring Boot (Java), que atua como um proxy para a API da NASA, processando as requisições do frontend e fornecendo os dados de forma estruturada.
+---
 
-## Funcionalidades
+## 🏗️ Architectural Evolution & Design Patterns
 
-* **Consulta por Intervalo de Datas**: Permite buscar asteroides em um período específico (limitado a 7 dias devido à API da NASA).
-* **Detalhes do Asteroide**: Exibe nome, diâmetro estimado, distância de aproximação, velocidade relativa e status de periculosidade.
-* **Interface Intuitiva**: Design limpo e moderno com uma paleta de cores em tons de preto, branco e cinza.
-* **Mensagens de Erro**: Exibe mensagens claras em caso de falha na comunicação ou na API.
+The core engine of this application was rewritten to showcase high-level software engineering best practices:
 
-## Tecnologias Utilizadas
+* **Rich Domain Model over Anemic Objects:** Transformed plain data holders into immutable **Java Records** (`Asteroid`, `CloseApproachData`, `EstimatedDiameter`). Business behaviors like `isDangerous()` and `isFast()` are now safely encapsulated inside the domain domain logic rather than leaking into procedural services.
+* **Anti-Corruption Layer (ACL):** Implemented a strict mapping boundary (`AsteroidMapper`). The application isolates raw, complex JSON schemas delivered by NASA (`jsonfields`) into clean, decoupled domain representations, ensuring high maintainability.
+* **From Reactive to Imperative (RestClient):** Removed the accidental complexity, high cognitive load, and overhead of Spring WebFlux (Netty, Mono/Flux) in favor of Spring's modern, synchronous, and thread-safe **RestClient**.
+* **Fail-Fast & Global Exception Handling:** Integrated a unified `@RestControllerAdvice` handling domain validations (like `InvalidDateRangeException`) and upstream infrastructure outages (`NasaApiException`), delivering standardized RFC-compliant error payloads (`ApiErrorResponse`).
+* **Self-Documenting API:** Fully integrated with **Springdoc OpenAPI / Swagger**, exposing explicit endpoints contracts, parameter examples, and schema types.
 
-**Frontend:**
-* `HTML5`
-* `CSS3` (com `Tailwind CSS`)
-* `JavaScript` (ES6+)
+---
 
-**Backend (API - Spring Boot):**
-* `Java`
-* `Spring Boot`
-* `Maven` (para gerenciamento de dependências)
-* `WebClient` (para consumo da API externa da NASA)
+## 🛠️ Tech Stack
 
-**Outras Ferramentas/APIs:**
-* `NASA NeoWs API` (API de asteroides próximos à Terra)
-### 1. Obtenha uma Chave de API da NASA:**
-    * Vá para o [site da API da NASA](https://api.nasa.gov/).
-    * Inscreva-se para obter uma chave de API gratuita.
+* **Language:** Java 21 (Leveraging modern features like Records and Pattern Matching)
+* **Framework:** Spring Boot 4.0.6
+    * Spring Web (MVC Pattern)
+    * Spring RestClient (HTTP Client Integration)
+    * Springdoc OpenAPI Starter WebMVC UI (Swagger Documentation)
+* **Build Tool:** Maven
+* **Testing Suite:** JUnit 5, Mockito, and AssertJ (100% focused on Domain Invariants and Use Case orchestration)
+* **External Provider:** NASA NeoWs API
+
+---
