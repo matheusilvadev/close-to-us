@@ -19,6 +19,7 @@ import java.util.List;
 @Tag(name = "Asteroids", description = "Operations related to near-earth asteroids")
 @RestController
 @RequestMapping("api/v1/asteroids")
+@CrossOrigin(origins = "*")
 public class AsteroidController {
 
     private final GetCloseAsteroidsService useCase;

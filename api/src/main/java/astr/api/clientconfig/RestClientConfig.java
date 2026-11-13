@@ -7,7 +7,9 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfig {
     @Bean
-    public RestClient.Builder restClientBuilder(){
-        return RestClient.builder();
+    public RestClient nasaRestClient(RestClient.Builder builder) {
+        return builder
+                .baseUrl("https://api.nasa.gov") // Já define a URL base aqui
+                .build();
     }
 }

@@ -14,7 +14,7 @@ public class NeoWsClient {
 
     private final RestClient restClient;
 
-    @Value("${nasa.api.key)")
+    @Value("${nasa.api.key}")
     private String apiKey;
 
     public NeoWsClient(RestClient restClient) {
