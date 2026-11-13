@@ -1,47 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="closetous.css" />
-    <title>Close To Us</title>
-    <!-- Inclui Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Close To Us — Monitoramento de asteroides próximos da Terra via NASA NeoWs API." />
+    <title>Close To Us — Near Earth Objects</title>
+
+    <!-- Tipografia editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="closetous.css" />
   </head>
   <body>
-    <header>
-      <h1>Close To Us</h1>
+
+    <!-- HEADER -->
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+        <a href="#" class="header-logo" aria-label="Close To Us — Página inicial">
+          CLOSE TO US
+        </a>
+        <nav class="header-meta" aria-label="Informações da aplicação">
+          <span class="header-tag">NASA NeoWs</span>
+          <span class="header-divider" aria-hidden="true">·</span>
+          <span class="header-tag">Near Earth Objects</span>
+        </nav>
+      </div>
     </header>
 
-    <div class="container">
-      <h2>Consulta de Asteroides Próximos à Terra</h2>
-      <p class="info-text">
-        Por favor, selecione um intervalo de datas. **Atenção:** Devido a uma
-        limitação da API da NASA, o período entre a data inicial e a data final
-        **não pode exceder 7 dias**.
-      </p>
+    <main id="main-content">
 
-      <div class="input-group">
-        <div>
-          <label for="startDate">Data Inicial:</label>
-          <input type="date" id="startDate" />
+      <!-- HERO SECTION -->
+      <section class="hero" aria-labelledby="hero-title">
+
+        <!-- Área esquerda: título, subtítulo e formulário -->
+        <div class="hero-left">
+
+          <div class="hero-content">
+            <div class="hero-label" aria-hidden="true">— Monitoramento Espacial</div>
+
+            <h1 id="hero-title" class="hero-title">
+              Observando o que<br>
+              <em>se aproxima.</em>
+            </h1>
+
+            <p class="hero-subtitle">
+              Explore asteroides próximos da Terra e acompanhe informações
+              sobre seus tamanhos, velocidades e potencial de risco.
+            </p>
+          </div>
+
+          <!-- Formulário de consulta -->
+          <div class="search-form" role="search" aria-label="Consultar asteroides por período">
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="startDate" class="form-label">Data inicial</label>
+                <input
+                  type="date"
+                  id="startDate"
+                  class="form-input"
+                  aria-required="true"
+                  aria-describedby="date-notice"
+                />
+              </div>
+              <div class="form-field">
+                <label for="endDate" class="form-label">Data final</label>
+                <input
+                  type="date"
+                  id="endDate"
+                  class="form-input"
+                  aria-required="true"
+                  aria-describedby="date-notice"
+                />
+              </div>
+            </div>
+
+            <p id="date-notice" class="form-notice">
+              * Intervalo máximo de 7 dias por limitação da API NASA
+            </p>
+
+            <button id="fetchButton" class="search-btn" type="button" aria-label="Consultar asteroides">
+              <span class="btn-text">Consultar Asteroides</span>
+              <span class="btn-icon" aria-hidden="true">→</span>
+            </button>
+
+          </div>
         </div>
-        <div>
-          <label for="endDate">Data Final:</label>
-          <input type="date" id="endDate" />
+
+        <!-- Área direita: animação espacial -->
+        <div class="hero-right" aria-hidden="true">
+          <canvas id="spaceCanvas" role="img" aria-label="Animação ilustrativa de asteroides orbitando a Terra"></canvas>
+          <div class="canvas-label">
+            <span>Representação ilustrativa — não científica</span>
+          </div>
         </div>
-        <button id="fetchButton">Buscar Asteroides</button>
+
+      </section>
+
+      <!-- ESTADO: Carregando -->
+      <div id="loading-indicator" class="hidden" role="status" aria-live="polite" aria-label="Carregando dados">
+        <div class="state-container loading-state">
+          <div class="loading-bar" aria-hidden="true">
+            <div class="loading-progress"></div>
+          </div>
+          <span class="state-label">Consultando NASA NeoWs&hellip;</span>
+        </div>
       </div>
 
-      <div id="loading-indicator" class="hidden">Carregando dados...</div>
-      <div id="error-message" class="hidden"></div>
-      <div id="results"></div>
-    </div>
+      <!-- ESTADO: Erro -->
+      <div id="error-message" class="hidden" role="alert" aria-live="assertive">
+        <!-- preenchido via JS com classe .error-state -->
+      </div>
 
+      <!-- SEÇÃO DE RESULTADOS -->
+      <section class="results-section" id="results-section" aria-labelledby="results-title">
+
+        <div class="results-header">
+          <div class="results-title-block">
+            <h2 id="results-title" class="results-title">Objetos próximos da Terra</h2>
+            <p class="results-subtitle">Dados de aproximação registrados pela NASA.</p>
+          </div>
+          <div class="results-count" id="results-count" aria-live="polite"></div>
+        </div>
+
+        <div class="results-table" role="region" aria-label="Lista de asteroides">
+          <div class="table-header" role="row" aria-hidden="true">
+            <span>Designação</span>
+            <span>Diâmetro máx.</span>
+            <span>Velocidade</span>
+            <span>Órbita</span>
+            <span>Status</span>
+          </div>
+          <!-- Asteroides renderizados aqui pelo JS -->
+          <div id="results" role="list"></div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Close To Us</span>
+        <span class="footer-credit">Dados fornecidos pela <a href="https://api.nasa.gov" target="_blank" rel="noopener noreferrer">NASA NeoWs API</a></span>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="space-animation.js"></script>
     <script src="closetous.js"></script>
+
   </body>
 </html>

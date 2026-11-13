@@ -1,226 +1,876 @@
-body {
-  font-family: "Inter", sans-serif;
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  padding-top: 8rem;
+/* ==========================================================================
+   CLOSE TO US — Design System CSS
+   Referência visual: Drae1.sh — minimalista, editorial, monocromático
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GOOGLE FONTS IMPORT
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+
+/* --------------------------------------------------------------------------
+   2. DESIGN TOKENS (Custom Properties)
+   -------------------------------------------------------------------------- */
+:root {
+  --bg:             #080808;
+  --bg-secondary:   #101010;
+  --surface:        #151515;
+  --border:         #292929;
+  --text-primary:   #F5F5F5;
+  --text-secondary: #929292;
+  --text-muted:     #606060;
+  --accent:         #FFFFFF;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Courier New', monospace;
+
+  --header-height: 56px;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. RESET & BASE
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-}
-
-/* Header fixo no topo */
-header {
-  background-color: #0d0d0d;
-  color: #ffffff;
-  padding: 1.5rem 2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: 0.15rem;
   margin: 0;
-  max-width: 900px;
-  width: 100%;
-  text-align: left;
+  padding: 0;
 }
 
-.container {
-  background-color: #282828;
-  padding: 3rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  max-width: 900px;
-  width: 90%;
-  text-align: center;
-  border: 1px solid #444444;
-  margin-bottom: 2rem;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-h2 {
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 0.05rem;
-}
-
-.info-text {
-  color: #a0a0a0;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-/* Input group base styles (for mobile first, column layout) */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  align-items: center;
-}
-
-.input-group label {
-  font-weight: 600;
-  color: #cccccc;
-  text-align: left;
-  margin-bottom: 0.5rem;
-  font-size: 1.05rem;
+img,
+canvas,
+svg {
   display: block;
-}
-
-.input-group input[type="date"] {
-  padding: 0.9rem 1.2rem;
-  border: 1px solid #555555;
-  border-radius: 0.75rem;
-  background-color: #383838;
-  color: #ffffff;
-  font-size: 1.15rem;
-  width: 100%;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.input-group input[type="date"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+  max-width: 100%;
 }
 
 button {
-  background-color: #007bff;
-  color: white;
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 0.75rem;
-  font-size: 1.2rem;
-  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  width: 100%;
-  box-sizing: border-box;
-}
-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-}
-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: inherit;
+  border: none;
+  background: none;
 }
 
-#loading-indicator {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  color: #ffc107;
+input,
+select,
+textarea {
+  font-family: inherit;
 }
-#error-message {
-  margin-top: 1.5rem;
-  color: #dc3545;
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. UTILITY
+   -------------------------------------------------------------------------- */
+.hidden {
+  display: none !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. HEADER
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 2rem;
+}
+
+.header-logo {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 600;
-  font-size: 1.1rem;
-}
-#results {
-  margin-top: 2rem;
-  text-align: left;
-}
-.asteroid-card {
-  background-color: #383838;
-  padding: 2rem;
-  border-radius: 1rem;
-  margin-bottom: 1.8rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-  border: 1px solid #555555;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.asteroid-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-}
-.asteroid-card h3 {
-  color: #ffffff;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #555555;
-  padding-bottom: 0.75rem;
-  letter-spacing: 0.03rem;
-}
-.asteroid-card p {
-  margin-bottom: 0.75rem;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #cccccc;
-}
-.asteroid-card strong {
-  color: #ffffff;
-}
-.hazardous {
-  color: #dc3545;
-  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-primary);
 }
 
-/* Responsividade para telas maiores (desktop) */
-@media (min-width: 640px) {
-  .input-group {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 2rem;
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4rem 3rem 4rem 2.5rem;
+  border-right: 1px solid var(--border);
+}
+
+.hero-right {
+  display: flex;
+  align-items: stretch;
+  min-height: 500px;
+  overflow: hidden;
+}
+
+#spaceCanvas {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  display: block;
+}
+
+
+/* --- Hero Left Content --- */
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 42ch;
+  margin-bottom: 3rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   7. SEARCH FORM
+   -------------------------------------------------------------------------- */
+.search-form {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 0.6rem 0;
+  outline: none;
+  border-radius: 0;
+  width: 100%;
+  transition: border-color 0.2s ease;
+  /* Remove browser default date picker styling where possible */
+  -webkit-appearance: none;
+  appearance: none;
+  color-scheme: dark;
+}
+
+.form-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* WebKit date input icon tint */
+.form-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) opacity(0.3);
+  cursor: pointer;
+}
+
+.form-notice {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
+}
+
+.search-btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+.btn-text {
+  /* inherits from parent */
+}
+
+.btn-icon {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. STATE — LOADING INDICATOR
+   -------------------------------------------------------------------------- */
+#loading-indicator {
+  padding: 3rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loading-state {
+  /* wraps the bar and label */
+}
+
+.loading-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--accent);
+  animation: loading-sweep 1.6s ease-in-out infinite;
+}
+
+@keyframes loading-sweep {
+  0% {
+    width: 0%;
+    left: 0%;
   }
-  .input-group > div {
-    width: 256px;
-    text-align: left;
+  50% {
+    width: 60%;
+    left: 20%;
   }
-  button {
-    width: 256px;
-    margin-top: 0;
+  100% {
+    width: 0%;
+    left: 100%;
   }
 }
+
+.state-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   9. STATE — ERROR MESSAGE
+   -------------------------------------------------------------------------- */
+#error-message {
+  padding: 3rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#error-message:not(.hidden) {
+  display: block;
+}
+
+.error-state {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25rem;
+}
+
+.error-icon {
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.error-state .state-label {
+  color: var(--text-secondary);
+}
+
+#error-message.hidden {
+  border: none;
+  padding: 0;
+}
+
+/* Empty / info state */
+.empty-state {
+  padding: 3rem 0;
+}
+
+.state-hint {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+/* Tags inside asteroid cards */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem;
+}
+
+.tag--alert {
+  color: var(--text-secondary);
+  border-color: var(--text-muted);
+}
+
+.safe {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Canvas label disclaimer */
+.canvas-label {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.canvas-label span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Make hero-right relative for canvas-label positioning */
+.hero-right {
+  position: relative;
+}
+
+/* Button loading state */
+.search-btn.btn-loading {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Results section visibility — hidden until JS adds .has-results */
+.results-section {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.results-section.has-results {
+  display: block;
+}
+
+/* Loading bar variant */
+.loading-bar {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--accent);
+  animation: loading-sweep 1.6s ease-in-out infinite;
+}
+
+/* Staggered row animation */
+@keyframes row-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.asteroid-card {
+  animation: row-appear 0.4s ease forwards;
+  animation-delay: calc(var(--row-index, 0) * 0.04s);
+  opacity: 0;
+}
+
+/* header-divider */
+.header-divider {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   10. RESULTS SECTION
+   -------------------------------------------------------------------------- */
+/* (layout consolidated into the .results-section block above) */
+
+.results-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.results-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.results-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.results-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.results-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+
+/* --------------------------------------------------------------------------
+   11. RESULTS TABLE
+   -------------------------------------------------------------------------- */
+.results-table {
+  width: 100%;
+}
+
+/* 5-column grid: Name | Diameter | Velocity | Orbit | Status */
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1fr;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   12. ASTEROID CARD (.asteroid-card)
+   -------------------------------------------------------------------------- */
+.asteroid-card {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid rgba(41, 41, 41, 0.6);
+  padding: 1.2rem 0;
+  cursor: default;
+  transition: background-color 0.2s ease;
+}
+
+.asteroid-card:hover {
+  background-color: var(--surface);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+}
+
+/* Name column — serif italic */
+.asteroid-card .asteroid-name,
+.asteroid-card:first-child {
+  /* intentionally blank; .asteroid-name used by JS */
+}
+
+.asteroid-card .asteroid-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+/* Data columns */
+.asteroid-card .asteroid-diameter,
+.asteroid-card .asteroid-velocity,
+.asteroid-card .asteroid-orbit,
+.asteroid-card .asteroid-data {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Generic mono data cells — covers any span/div inside a card */
+.asteroid-card span,
+.asteroid-card div {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Override for the name cell specifically */
+.asteroid-card span:first-child,
+.asteroid-card .asteroid-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+
+/* --------------------------------------------------------------------------
+   13. HAZARDOUS BADGE (.hazardous)
+   -------------------------------------------------------------------------- */
+.hazardous {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+}
+
+.hazardous::before {
+  content: '⚠ ';
+}
+
+
+/* --------------------------------------------------------------------------
+   14. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 2.5rem;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-copy,
+.footer-credit {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   15. RESPONSIVE — < 1024px
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: 350px auto;
+    min-height: 100vh;
+  }
+
+  .hero-left {
+    order: 2;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+  }
+
+  .hero-right {
+    order: 1;
+    min-height: 350px;
+  }
+
+  #spaceCanvas {
+    min-height: 350px;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   16. RESPONSIVE — < 768px
+   -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  body {
-    padding-top: 6rem;
+  :root {
+    --header-height: 48px;
   }
-  header h1 {
-    font-size: 1.8rem;
-    letter-spacing: 0.1rem;
+
+  .header-inner {
+    padding: 0 1.25rem;
   }
-  .container {
-    padding: 2rem;
-    border-radius: 1rem;
+
+  .header-meta {
+    display: none;
   }
-  h2 {
-    font-size: 1.8rem;
+
+  .hero-left {
+    padding: 2.5rem 1.25rem;
   }
-  .info-text {
-    font-size: 0.9rem;
+
+  .hero-title {
+    font-size: clamp(2.8rem, 10vw, 4rem);
+    margin-bottom: 1rem;
   }
-  button {
-    font-size: 1.05rem;
-    padding: 0.9rem 1.8rem;
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
   }
-  .input-group input[type="date"] {
-    font-size: 1rem;
-    padding: 0.8rem 1rem;
+
+  .form-row {
+    flex-direction: column;
+    gap: 1.25rem;
   }
-  .asteroid-card h3 {
-    font-size: 1.6rem;
+
+  .search-btn {
+    width: 100%;
+    justify-content: space-between;
   }
-  .asteroid-card p {
-    font-size: 0.95rem;
+
+  /* Results section */
+  .results-section {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Hide table header on mobile */
+  .table-header {
+    display: none;
+  }
+
+  /* Cards become flex columns with label: value layout */
+  .asteroid-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .asteroid-card:hover {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+
+  .asteroid-card span:first-child,
+  .asteroid-card .asteroid-name {
+    font-size: 1.1rem;
+  }
+
+  /* Show data attribute labels on mobile */
+  .asteroid-card [data-label]::before {
+    content: attr(data-label) ': ';
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 1.25rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  /* Error / Loading containers */
+  #loading-indicator,
+  #error-message {
+    padding: 2rem 1.25rem;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   17. ACCESSIBILITY — prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .loading-line::after {
+    animation: none;
+    width: 40%;
+    left: 30%;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   END OF FILE
+   -------------------------------------------------------------------------- */
