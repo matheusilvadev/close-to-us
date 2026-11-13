@@ -1,13 +1,16 @@
 package astr.api.clientconfig.nasaclient.jsonfields;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record NearEarthObjectsJsonField(
         String id,
         @JsonProperty("neo_reference_id") String neoReferenceId,
         String name,
+        String designation,
         @JsonProperty("nasa_jpl_url") String nasaJplUrl,
         @JsonProperty("absolute_magnitude_h") double absoluteMagnitudeH,
         @JsonProperty("estimated_diameter") EstimatedDiameterJsonField estimatedDiameter,

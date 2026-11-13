@@ -10,138 +10,66 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class AsteroidTest {
 
     @Test
-    @DisplayName("Should identify asteroid as dangerous when hazardous and diameter is greater than 300 meters")
+    @DisplayName("Should identify asteroid as dangerous strictly based on NASA isPotentiallyHazardousAsteroid flag")
     void shouldIdentifyDangerousAsteroid() {
-
         Asteroid asteroid = new Asteroid(
                 "123",
                 "Apophis",
                 "http://nasa.gov",
                 20.5,
-                new EstimatedDiameter(
-                        250,
-                        350),
+                new EstimatedDiameter(50, 120),
                 true,
-                new CloseApproachData(
-                        "2025-Sep-08 20:28",
-                        45000,
-                        "Earth"),
+                new CloseApproachData("2025-Sep-08 20:28", 22.5, 1200000.0, "Earth"),
                 false);
 
-        boolean result = asteroid.isDangerous();
-        assertThat(result).isTrue();
+        assertThat(asteroid.isDangerous()).isTrue();
     }
 
     @Test
-    @DisplayName("Should not identify asteroid as dangerous when diameter is less than 300 meters")
-    void shouldNotIdentifyDangerousAsteroidWhenDiameterIsSmall() {
-
-        Asteroid asteroid = new Asteroid(
-                "123",
-                "Small Asteroid",
-                "https://nasa.gov",
-                18.0,
-
-                new EstimatedDiameter(
-                        100,
-                        250),
-
-                true,
-
-                new CloseApproachData(
-                        "2025-Sep-08 20:28",
-                        30000,
-                        "Earth"),
-
-                false);
-
-        boolean result = asteroid.isDangerous();
-
-        assertThat(result).isFalse();
-    }
-
-    @Test
-    @DisplayName("Should not identify asteroid as dangerous when asteroid is not hazardous")
+    @DisplayName("Should not identify asteroid as dangerous when NASA flag is false even if diameter is large")
     void shouldNotIdentifyDangerousAsteroidWhenNotHazardous() {
-
         Asteroid asteroid = new Asteroid(
                 "123",
                 "Safe Asteroid",
                 "https://nasa.gov",
                 18.0,
-
-                new EstimatedDiameter(
-                        400,
-                        500),
-
+                new EstimatedDiameter(400, 500),
                 false,
-
-                new CloseApproachData(
-                        "2025-Sep-08 20:28",
-                        30000,
-                        "Earth"),
-
+                new CloseApproachData("2025-Sep-08 20:28", 15.0, 3000000.0, "Earth"),
                 false);
 
-        boolean result = asteroid.isDangerous();
-
-        assertThat(result).isFalse();
+        assertThat(asteroid.isDangerous()).isFalse();
     }
 
     @Test
-    @DisplayName("Should identify asteroid as fast when velocity is greater than 50000 mph")
+    @DisplayName("Should identify asteroid as fast when relative velocity is greater than 20 km/s")
     void shouldIdentifyFastAsteroid() {
-
         Asteroid asteroid = new Asteroid(
                 "123",
                 "Fast Asteroid",
                 "https://nasa.gov",
                 18.0,
-
-                new EstimatedDiameter(
-                        100,
-                        200),
-
+                new EstimatedDiameter(100, 200),
                 false,
-
-                new CloseApproachData(
-                        "2025-Sep-08 20:28",
-                        65000,
-                        "Earth"),
-
+                new CloseApproachData("2025-Sep-08 20:28", 25.4, 4000000.0, "Earth"),
                 false);
 
-        boolean result = asteroid.isFast();
-
-        assertThat(result).isTrue();
+        assertThat(asteroid.isFast()).isTrue();
     }
 
     @Test
-    @DisplayName("Should not identify asteroid as fast when velocity is lower than 50000 mph")
+    @DisplayName("Should not identify asteroid as fast when relative velocity is lower than 20 km/s")
     void shouldNotIdentifyFastAsteroid() {
-
         Asteroid asteroid = new Asteroid(
                 "123",
                 "Slow Asteroid",
                 "https://nasa.gov",
                 18.0,
-
-                new EstimatedDiameter(
-                        100,
-                        200),
-
+                new EstimatedDiameter(100, 200),
                 false,
-
-                new CloseApproachData(
-                        "2025-Sep-08 20:28",
-                        25000,
-                        "Earth"),
-
+                new CloseApproachData("2025-Sep-08 20:28", 12.3, 5000000.0, "Earth"),
                 false);
 
-        boolean result = asteroid.isFast();
-
-        assertThat(result).isFalse();
+        assertThat(asteroid.isFast()).isFalse();
     }
-
 }

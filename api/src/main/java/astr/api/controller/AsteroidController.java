@@ -33,35 +33,35 @@ public class AsteroidController {
                         based on a start and end date.
                         """)
     @ApiResponses(value = {
-
-            @ApiResponse(responseCode = "200", description = "Asteroids fetched successfully", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AsteroidResponse.class)))),
-
+            @ApiResponse(responseCode = "200", description = "Asteroids fetched successfully",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = AsteroidResponse.class)))),
             @ApiResponse(responseCode = "400", description = "Invalid date parameters"),
-
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping()
     public List<AsteroidResponse> getAsteroids(
 
-            @Parameter(description = "Start date in yyyy-MM-dd format", example = "2025-09-07") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @Parameter(description = "Start date in yyyy-MM-dd format", example = "2025-09-07")
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 
-            @Parameter(description = "End date in yyyy-MM-dd format", example = "2025-09-08") @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+            @Parameter(description = "End date in yyyy-MM-dd format", example = "2025-09-08")
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         return useCase.execute(startDate, endDate)
                 .stream()
-                .map(asteroid -> new AsteroidResponse(
-                        asteroid.name(),
-
-                        asteroid.estimatedDiameter()
-                                .maxMeters(),
-
-                        asteroid.isDangerous(),
-
-                        asteroid.isFast(),
-
-                        asteroid.closeApproachData()
-                                .orbitingBody()))
+                .map(asteroid -> {
+                    var approach = asteroid.closeApproachData();
+                    return new AsteroidResponse(
+                            asteroid.designation(),
+                            asteroid.name(),
+                            asteroid.estimatedDiameter() != null ? asteroid.estimatedDiameter().maxMeters() : 0.0,
+                            approach != null ? approach.velocityKmS() : 0.0,
+                            approach != null ? approach.missDistanceKm() : 0.0,
+                            approach != null ? approach.closeApproachDate() : null,
+                            approach != null ? approach.orbitingBody() : "Unknown",
+                            asteroid.isDangerous()
+                    );
+                })
                 .toList();
     }
-
 }

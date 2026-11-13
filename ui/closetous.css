@@ -590,10 +590,10 @@ ol {
   width: 100%;
 }
 
-/* 5-column grid: Name | Diameter | Velocity | Orbit | Status */
+/* 6-column grid: Name | Diameter | Velocity | Distance | Orbit | Status */
 .table-header {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1fr;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr 1.2fr 1fr;
   gap: 1rem;
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -611,7 +611,7 @@ ol {
    -------------------------------------------------------------------------- */
 .asteroid-card {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr 1fr;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr 1.2fr 1fr;
   gap: 1rem;
   align-items: center;
   border-bottom: 1px solid rgba(41, 41, 41, 0.6);
